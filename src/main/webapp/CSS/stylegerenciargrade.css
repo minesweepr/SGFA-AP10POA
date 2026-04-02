@@ -1,0 +1,175 @@
+
+
+.titulo-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 26px;
+    color: var(--primary-dark);
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.titulo-voltar:hover {
+    opacity: 0.8;
+}
+
+/* Barra de Busca e Filtro */
+.barra-busca-filtro {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.input-busca-container {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px 15px;
+    flex: 1;
+    min-width: 250px;
+}
+
+.input-busca-container input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 15px;
+    color: #333;
+}
+
+.btn-filtro {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #555;
+    font-weight: bold;
+}
+
+/* Lista de Matérias Disponíveis */
+.lista-materias {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.linha-materia {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.linha-materia span {
+    font-size: 14px;
+    color: #333;
+}
+
+.linha-materia .col-nome { flex: 2; font-weight: bold; min-width: 220px; }
+.linha-materia .col-horario { flex: 1; min-width: 150px; font-weight: 500; }
+.linha-materia .col-codigo { flex: 1; text-align: center; font-weight: bold;}
+.linha-materia .col-carga { flex: 1; text-align: center; color: #666; }
+
+.btn-selecionar {
+    background-color: var(--success-green);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 30px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn-selecionar:hover { opacity: 0.85; }
+.btn-selecionar.selecionado { background-color: #ccc; color: #666; }
+
+/* Título com botão amarelo inline */
+.cabecalho-secao-inline {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.btn-editar-grade {
+    background-color: var(--accent-yellow);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Barra Inferior (Salvar/Descartar) */
+.barra-acoes-finais {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid rgba(173, 216, 230, 0.5); /* Usa a cor do grid como divisor */
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.total-disciplinas-box {
+    background: white;
+    padding: 12px 25px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-weight: bold;
+    color: var(--primary-dark);
+    font-size: 16px;
+}
+
+.botoes-finais {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-descartar {
+    background-color: var(--danger-red);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-salvar {
+    background-color: var(--primary-dark);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Ajustes de Responsividade para a nova tela */
+@media (max-width: 768px) {
+    .barra-acoes-finais { flex-direction: column; align-items: stretch; }
+    .botoes-finais { flex-direction: column; }
+    .botoes-finais button { width: 100%; }
+    .linha-materia { flex-direction: column; align-items: flex-start; }
+    .linha-materia .btn-selecionar { width: 100%; margin-top: 10px; }
+}

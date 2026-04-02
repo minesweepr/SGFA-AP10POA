@@ -218,7 +218,7 @@ function alterarAulas(valor) {
 }
 
 
-// 4. ENVIO DE DADOS (POST PARA O JAVA)
+// ENVIO DE DADOS 
 
 
 async function enviarFalta(event) {
