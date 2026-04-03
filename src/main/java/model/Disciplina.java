@@ -13,4 +13,8 @@ public class Disciplina{
 
 	public int getCargaHorariaTotal(){return cargaHorariaTotal;}
 	public void setCargaHorariaTotal(int cargaHorariaTotal){this.cargaHorariaTotal=cargaHorariaTotal;}
+
+	public int getLimiteFaltas(){
+		return (int) (this.cargaHorariaTotal * 0.25);
+	}
 }
