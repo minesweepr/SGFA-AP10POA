@@ -4,10 +4,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class HorarioDia{
+	private int id;
 	private String diaSemana;
     private List<AulaDisciplina> aulas = new ArrayList<>();
     private boolean faltouDiaInteiro;
     
+	public int getId() { return id; }
+	public void setId(int id) { this.id = id; }
+
 	public String getDiaSemana(){return diaSemana;}
 	public void setDiaSemana(String diaSemana){this.diaSemana=diaSemana;}
 	

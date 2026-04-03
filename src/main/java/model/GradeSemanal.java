@@ -4,9 +4,13 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class GradeSemanal{
+	private int id;
 	private String semestre;
 	private List<HorarioDia> horariosSemanais = new ArrayList<>();
 	
+	public int getId() { return id; }
+	public void setId(int id) { this.id = id; }
+
 	public String getSemestre(){return semestre;}
 	public void setSemestre(String semestre){this.semestre=semestre;}
 	
