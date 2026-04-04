@@ -1,11 +1,11 @@
 package conectores;
 
 import conexao.ConexaoBD;
-import model.AulaDisciplina;
-import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.AulaDisciplina;
 
 public class AulaDisciplinaConector {
 
@@ -43,6 +43,7 @@ public class AulaDisciplinaConector {
             return false;
         }
     }
+
     public int contarFaltasDoAluno(String matricula, String codigoDisciplina) {
         int totalFaltas = 0;
 
@@ -71,4 +72,5 @@ public class AulaDisciplinaConector {
 
         return totalFaltas;
     }
+
 }

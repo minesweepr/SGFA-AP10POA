@@ -50,6 +50,7 @@ public class AlunoConector {
         }
         return null;
     }
+
     public Aluno buscarPorMatricula(String matricula) {
         Aluno aluno = null;
         String sql = "SELECT * FROM Aluno WHERE matricula = ?";
@@ -74,4 +75,6 @@ public class AlunoConector {
         return aluno;
     }
 }
+
+
 
