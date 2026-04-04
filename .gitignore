@@ -45,3 +45,8 @@ fotos/
 *.iml
 *.iws
 .smarttomcat/
+
+
+# Exceções
+!lib/mysql-connector-j-8.3.0.jar
+!src/main/webapp/WEB-INF/lib/mysql-connector-j-8.3.0.jar
