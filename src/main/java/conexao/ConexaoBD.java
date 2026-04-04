@@ -12,7 +12,6 @@ public class ConexaoBD {
     
     private static final String PASS = "";
 
-
     public static Connection conectar() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

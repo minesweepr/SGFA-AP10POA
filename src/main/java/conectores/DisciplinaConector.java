@@ -49,7 +49,6 @@ public class DisciplinaConector {
         }
         return lista;
     }
-
     public List<Disciplina> listarPorAluno(String matriculaAluno) {
         List<Disciplina> lista = new ArrayList<>();
 

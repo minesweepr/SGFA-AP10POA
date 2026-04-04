@@ -1,19 +1,16 @@
 package conectores;
 
 import conexao.ConexaoBD;
+import model.GradeSemanal;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.ResultSet; 
 import java.sql.SQLException;
 import java.sql.Statement;
-import model.GradeSemanal;
 
 public class GradeSemanalConector {
 
-
-
-
-    // Salva a grade no Banco e atrela à Matricula do aluno em questão
 
     public boolean salvarGrade(GradeSemanal grade, String matriculaAluno) {
         String sql = "INSERT INTO GradeSemanal (semestre, aluno_matricula) VALUES (?, ?)";
@@ -74,6 +71,3 @@ public class GradeSemanalConector {
         }
     }
 }
-
-
-
