@@ -10,7 +10,8 @@ public class ConexaoBD {
     
     private static final String USER = "root";
     
-    private static final String PASS = "qwe123!A#"; 
+    private static final String PASS = "";
+
 
     public static Connection conectar() {
         try {
