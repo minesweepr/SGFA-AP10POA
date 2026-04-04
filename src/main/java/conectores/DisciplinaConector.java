@@ -49,4 +49,36 @@ public class DisciplinaConector {
         }
         return lista;
     }
+
+    public List<Disciplina> listarPorAluno(String matriculaAluno) {
+        List<Disciplina> lista = new ArrayList<>();
+
+        // Busca as disciplinas cruzando as tabelas GradeSemanal, HorarioDia e AulaDisciplina
+        String sql = "SELECT DISTINCT d.codigo, d.nome, d.carga_horaria_total " +
+                "FROM Disciplina d " +
+                "JOIN AulaDisciplina ad ON d.codigo = ad.disciplina_codigo " +
+                "JOIN HorarioDia hd ON ad.horario_dia_id = hd.id " +
+                "JOIN GradeSemanal gs ON hd.grade_id = gs.id " +
+                "WHERE gs.aluno_matricula = ?";
+
+        try (Connection conn = ConexaoBD.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, matriculaAluno);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Disciplina d = new Disciplina();
+                d.setCodigo(rs.getString("codigo"));
+                d.setNome(rs.getString("nome"));
+                d.setCargaHorariaTotal(rs.getInt("carga_horaria_total"));
+                lista.add(d);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao listar disciplinas do aluno: " + e.getMessage());
+        }
+
+        return lista;
+    }
 }
+

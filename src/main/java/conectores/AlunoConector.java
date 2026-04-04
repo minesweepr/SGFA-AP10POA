@@ -50,4 +50,31 @@ public class AlunoConector {
         }
         return null;
     }
+
+    public Aluno buscarPorMatricula(String matricula) {
+        Aluno aluno = null;
+        String sql = "SELECT * FROM Aluno WHERE matricula = ?";
+
+        try (Connection conn = ConexaoBD.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, matricula);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                aluno = new Aluno();
+                aluno.setMatricula(rs.getString("matricula"));
+                aluno.setNome(rs.getString("nome"));
+                aluno.setEmail(rs.getString("email"));
+                aluno.setSenha(rs.getString("senha"));
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar aluno por matrícula: " + e.getMessage());
+        }
+
+        return aluno;
+    }
 }
+
+
+
