@@ -37,3 +37,9 @@ out/
 # OS files
 .DS_Store
 Thumbs.db
+
+#Intellij
+.idea/
+*.iml
+*.iws
+.smarttomcat/

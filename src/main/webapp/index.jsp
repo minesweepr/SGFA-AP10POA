@@ -177,9 +177,7 @@
                     <hr class="divisor-card">
 
                     <div class="detalhes-acoes">
-                        <button class="btn-acao-card">
-                            <i class="fas fa-edit"></i> Ajustar faltas
-                        </button>
+
                     </div>
                 </div>
             </div>
@@ -251,7 +249,7 @@
             <div class="modal-header">Registrar ausência</div>
             <div class="modal-body">
 
-                <form action="RegistrarFaltaServlet" method="POST">
+           <form action="<%= request.getContextPath() %>/RegistrarFaltaServlet" method="POST">
 
                     <input type="hidden" name="matriculaAluno" value="<%= matriculaLogada %>">
 
