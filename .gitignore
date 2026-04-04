@@ -37,3 +37,11 @@ out/
 # OS files
 .DS_Store
 Thumbs.db
+
+fotos/
+
+# IntelliJ IDEA (Arquivos Vindo do commit da outra pessoa)
+.idea/
+*.iml
+*.iws
+.smarttomcat/
