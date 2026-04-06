@@ -27,7 +27,7 @@ public class GradeSemanalConector {
         }
     }
 
-    public void preencherGrade(String matricula, String[][] matriz) {
+    public void preencherGrade(String matriculaAluno, String[][] matriz) {
 
         String sql = "SELECT hd.dia_semana, ad.disciplina_codigo, ad.quantidade_tempos " +
                 "FROM HorarioDia hd " +
@@ -39,7 +39,7 @@ public class GradeSemanalConector {
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, matricula);
+            stmt.setString(1, matriculaAluno);
             ResultSet rs = stmt.executeQuery();
 
             int[] proximaLinhaLivre = new int[5]; // 0=Segunda, 1=Terça, ..., 4=Sexta

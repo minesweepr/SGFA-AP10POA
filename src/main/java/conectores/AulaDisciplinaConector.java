@@ -2,24 +2,26 @@ package conectores;
 
 import conexao.ConexaoBD;
 import model.AulaDisciplina;
+import model.Disciplina;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AulaDisciplinaConector {
 
-
     public boolean vincularAulaNoDia(AulaDisciplina aula, int horarioDiaId) {
-        String sql = "INSERT INTO AulaDisciplina (horario_dia_id, disciplina_codigo, quantidade_tempos, faltou_aula, professor_ausente, nao_aplicavel) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO AulaDisciplina (horario_dia_id, disciplina_codigo, quantidade_tempos, tempo_inicio, professor_ausente, nao_aplicavel) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection con = ConexaoBD.conectar();
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
             stmt.setInt(1, horarioDiaId);
             stmt.setString(2, aula.getDisciplina().getCodigo());
             stmt.setInt(3, aula.getQuantidadeTempos());
-            stmt.setBoolean(4, aula.isFaltouAula());
+            stmt.setInt(4, aula.getTempoInicio());
             stmt.setBoolean(5, aula.isProfessorAusente());
             stmt.setBoolean(6, aula.isNaoAplicavel());
             stmt.executeUpdate();
@@ -30,82 +32,63 @@ public class AulaDisciplinaConector {
         }
     }
 
+    public List<AulaDisciplina> buscarAulasPorDia(int horarioDiaId) {
+        List<AulaDisciplina> aulas = new ArrayList<>();
+        String sql = "SELECT ad.*, d.nome as disciplina_nome, d.carga_horaria_total " +
+                     "FROM AulaDisciplina ad " +
+                     "JOIN Disciplina d ON ad.disciplina_codigo = d.codigo " +
+                     "WHERE ad.horario_dia_id = ?";
+        
+        try (Connection con = ConexaoBD.conectar();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            
+            stmt.setInt(1, horarioDiaId);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                AulaDisciplina aula = new AulaDisciplina();
+                aula.setId(rs.getInt("id"));
+                aula.setQuantidadeTempos(rs.getInt("quantidade_tempos"));
+                aula.setTempoInicio(rs.getInt("tempo_inicio"));
+                aula.setProfessorAusente(rs.getBoolean("professor_ausente"));
+                aula.setNaoAplicavel(rs.getBoolean("nao_aplicavel"));
+                
+                Disciplina d = new Disciplina();
+                d.setCodigo(rs.getString("disciplina_codigo"));
+                d.setNome(rs.getString("disciplina_nome"));
+                d.setCargaHorariaTotal(rs.getInt("carga_horaria_total"));
+                aula.setDisciplina(d);
+                
+                aulas.add(aula);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar aulas por dia: " + e.getMessage());
+        }
+        return aulas;
+    }
 
-    public boolean marcarFaltaNaAula(int aulaId, boolean faltou) {
-        String sql = "UPDATE AulaDisciplina SET faltou_aula = ? WHERE id = ?";
+    public int contarFaltasDoAluno(String matriculaAluno, String codigoDisciplina) {
+        int total = 0;
+        String sql = "SELECT SUM(rf.quantidade_tempos_perdidos) as total " +
+                     "FROM RegistroFalta rf " +
+                     "JOIN AulaDisciplina ad ON rf.aula_disciplina_id = ad.id " +
+                     "JOIN HorarioDia hd ON ad.horario_dia_id = hd.id " +
+                     "JOIN GradeSemanal gs ON hd.grade_id = gs.id " +
+                     "WHERE gs.aluno_matricula = ? AND ad.disciplina_codigo = ?";
+
         try (Connection con = ConexaoBD.conectar();
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setBoolean(1, faltou);
-            stmt.setInt(2, aulaId);
-            stmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Erro ao registrar falta na aula: " + e.getMessage());
-            return false;
-        }
-    }
-
-    // Método que adicionamos para a tela principal
-    public int contarFaltasDoAluno(String matricula, String codigoDisciplina) {
-        int totalFaltas = 0;
-        String sql = "SELECT SUM(ad.quantidade_tempos) AS total_faltas " +
-                "FROM AulaDisciplina ad " +
-                "JOIN HorarioDia hd ON ad.horario_dia_id = hd.id " +
-                "JOIN GradeSemanal gs ON hd.grade_id = gs.id " +
-                "WHERE gs.aluno_matricula = ? " +
-                "AND ad.disciplina_codigo = ? " +
-                "AND ad.faltou_aula = TRUE";
-
-        try (Connection conn = ConexaoBD.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, matricula);
+            stmt.setString(1, matriculaAluno);
             stmt.setString(2, codigoDisciplina);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                totalFaltas = rs.getInt("total_faltas");
+                total = rs.getInt("total");
             }
         } catch (SQLException e) {
-            System.err.println("Erro ao contar faltas: " + e.getMessage());
+            System.err.println("Erro ao contar total de faltas no conector legado: " + e.getMessage());
         }
-        return totalFaltas;
-    }
-
-
-    public boolean registrarNovaFaltaSimples(String matricula, String codigoDisciplina, int qtd) {
-        int horarioId = -1;
-
-        String sqlSelect = "SELECT hd.id FROM HorarioDia hd JOIN GradeSemanal gs ON hd.grade_id = gs.id WHERE gs.aluno_matricula = ? LIMIT 1";
-
-        try (Connection conn = ConexaoBD.conectar();
-             PreparedStatement stmtSelect = conn.prepareStatement(sqlSelect)) {
-
-            stmtSelect.setString(1, matricula);
-            ResultSet rs = stmtSelect.executeQuery();
-            if (rs.next()) {
-                horarioId = rs.getInt("id");
-            }
-        } catch (SQLException e) {
-            System.err.println("Erro ao buscar horario para falta: " + e.getMessage());
-        }
-
-        if (horarioId == -1) return false;
-
-        String sqlInsert = "INSERT INTO AulaDisciplina (horario_dia_id, disciplina_codigo, quantidade_tempos, faltou_aula) VALUES (?, ?, ?, TRUE)";
-
-        try (Connection conn = ConexaoBD.conectar();
-             PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert)) {
-
-            stmtInsert.setInt(1, horarioId);
-            stmtInsert.setString(2, codigoDisciplina);
-            stmtInsert.setInt(3, qtd);
-            stmtInsert.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Erro ao inserir falta: " + e.getMessage());
-            return false;
-        }
+        return total;
     }
 }

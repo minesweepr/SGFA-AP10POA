@@ -8,10 +8,18 @@
         <servlet-name>RegistrarFalta</servlet-name>
         <servlet-class>servlets.RegistrarFaltaServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>RegistrarFalta</servlet-name>
         <url-pattern>/RegistrarFaltaServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DadosAluno</servlet-name>
+        <servlet-class>servlets.DadosAlunoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DadosAluno</servlet-name>
+        <url-pattern>/api/dados-aluno</url-pattern>
     </servlet-mapping>
 
     <!--Obrigando a primeira pagina ser o Login no lugar do index-->

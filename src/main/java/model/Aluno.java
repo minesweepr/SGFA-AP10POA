@@ -21,11 +21,4 @@ public class Aluno{
 
 	public GradeSemanal getGrade(){return grade;}
 	public void setGrade(GradeSemanal grade){this.grade=grade;}
-
-	public String visualizarPanorama(){
-		if(grade != null) {
-			return grade.gerarPanorama();
-		}
-		return "Nenhuma grade vinculada ao aluno.";
-	}
 }
