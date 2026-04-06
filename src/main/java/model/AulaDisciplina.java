@@ -4,6 +4,7 @@ public class AulaDisciplina{
 	private int id;
 	private Disciplina disciplina;
     private int quantidadeTempos;
+    private int tempoInicio;
     private boolean faltouAula;
     private boolean professorAusente;
     private boolean naoAplicavel;
@@ -15,7 +16,10 @@ public class AulaDisciplina{
 	public void setDisciplina(Disciplina disciplina){this.disciplina=disciplina;}
 	
 	public int getQuantidadeTempos(){return quantidadeTempos;}
-	public void setQuantidadeTempos(int quantidadeTempos){this.quantidadeTempos=quantidadeTempos;}
+	public void setQuantidadeTempos(int qt){this.quantidadeTempos=qt;}
+
+	public int getTempoInicio(){return tempoInicio;}
+	public void setTempoInicio(int t){this.tempoInicio=t;}
 	
 	public boolean isFaltouAula(){return faltouAula;}
 	public void setFaltouAula(boolean faltouAula){this.faltouAula=faltouAula;}
@@ -25,8 +29,4 @@ public class AulaDisciplina{
 	
 	public boolean isNaoAplicavel(){return naoAplicavel;}
 	public void setNaoAplicavel(boolean naoAplicavel){this.naoAplicavel=naoAplicavel;}
-
-	public void marcarFalta(){
-		this.faltouAula = true;
-	}
 }

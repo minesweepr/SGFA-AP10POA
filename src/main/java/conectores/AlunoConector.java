@@ -50,14 +50,14 @@ public class AlunoConector {
         }
         return null;
     }
-    public Aluno buscarPorMatricula(String matricula) {
+    public Aluno buscarPorMatricula(String matriculaAluno) {
         Aluno aluno = null;
         String sql = "SELECT * FROM Aluno WHERE matricula = ?";
 
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, matricula);
+            stmt.setString(1, matriculaAluno);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {

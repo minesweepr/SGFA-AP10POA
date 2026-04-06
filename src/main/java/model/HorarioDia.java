@@ -21,15 +21,6 @@ public class HorarioDia{
 	public boolean isFaltouDiaInteiro(){return faltouDiaInteiro;}
 	public void setFaltouDiaInteiro(boolean faltouDiaInteiro){this.faltouDiaInteiro=faltouDiaInteiro;}
 
-	public void marcarFaltaDia(){
-		this.faltouDiaInteiro = true;
-		if (aulas != null) {
-			for(AulaDisciplina aula : aulas) {
-				aula.marcarFalta();
-			}
-		}
-	}
-
 	public int getTotalFaltas(){
 		int faltasDoDia = 0;
 		if (aulas != null) {

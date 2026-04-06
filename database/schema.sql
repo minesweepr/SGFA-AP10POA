@@ -34,11 +34,19 @@ CREATE TABLE IF NOT EXISTS AulaDisciplina (
     horario_dia_id INT NOT NULL,
     disciplina_codigo VARCHAR(20) NOT NULL,
     quantidade_tempos INT NOT NULL DEFAULT 1,
-    faltou_aula BOOLEAN DEFAULT FALSE,
+    tempo_inicio INT DEFAULT NULL,
     professor_ausente BOOLEAN DEFAULT FALSE,
     nao_aplicavel BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (horario_dia_id) REFERENCES HorarioDia(id) ON DELETE CASCADE,
     FOREIGN KEY (disciplina_codigo) REFERENCES Disciplina(codigo)
+);
+
+CREATE TABLE IF NOT EXISTS RegistroFalta (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    aula_disciplina_id INT NOT NULL,
+    data_falta DATE NOT NULL,
+    quantidade_tempos_perdidos INT NOT NULL,
+    FOREIGN KEY (aula_disciplina_id) REFERENCES AulaDisciplina(id) ON DELETE CASCADE
 );
 
 INSERT INTO Aluno (matricula, nome, email, senha) VALUES
@@ -87,7 +95,12 @@ INSERT INTO Disciplina (codigo, nome, carga_horaria_total) VALUES
 ('5SBD', 'Programação de Scripts de Banco de Dados', 80),
 ('5TAV', 'Tópicos Avançados', 80);
 
-INSERT INTO AulaDisciplina (id, horario_dia_id, disciplina_codigo, quantidade_tempos, faltou_aula, professor_ausente, nao_aplicavel) VALUES
-(1, 101, '4SEG', 2, 0, 0, 0),
-(2, 101, '4MOD', 2, 0, 0, 0),
-(3, 102, '4EMP', 2, 0, 0, 0);
+INSERT INTO AulaDisciplina (id, horario_dia_id, disciplina_codigo, quantidade_tempos, tempo_inicio, professor_ausente, nao_aplicavel) VALUES
+(1, 101, '4SEG', 2, 1, 0, 0),
+(2, 101, '4MOD', 2, 3, 0, 0),
+(3, 102, '4EMP', 2, 1, 0, 0);
+
+INSERT INTO RegistroFalta (aula_disciplina_id, data_falta, quantidade_tempos_perdidos) VALUES
+(1, '2026-04-01', 2),
+(1, '2026-04-03', 2),
+(2, '2026-04-01', 2);
