@@ -5,8 +5,20 @@
 
 <%
 
-     //String matriculaLogada = (String) session.getAttribute("usuarioLogado");
-   String matriculaLogada = "123456";
+
+    // Verifica se o usuário NÃO tem a sessão ativa------------------
+    if (session.getAttribute("alunoAtivo") == null) {
+        response.sendRedirect("login.jsp");
+        return; // O return é vital para o servidor parar de carregar o resto da página!
+    }
+
+
+    // Pega o objeto Aluno que o LoginServlet guardou na sessão
+    model.Aluno alunoSessao = (model.Aluno) session.getAttribute("alunoAtivo");
+
+    // Extrai a matrícula dinâmica daquele aluno
+    String matriculaLogada = alunoSessao.getMatricula();
+
 
     // Instanciando os conectores (DAOs) da pasta 'conectores'
     AlunoConector alunoDAO = new AlunoConector();
@@ -79,7 +91,7 @@
             <button class="btn btn-yellow" onclick="abrirModalFalta()" id="btn-registrar-falta-topo">
                 <i class="fas fa-plus"></i> Registrar falta
             </button>
-            <button class="btn btn-outline" id="btn-gerenciar-grade-topo" onclick="window.location.href='gerenciar-grade.jsp'">
+            <button class="btn btn-outline" id="btn-gerenciar-grade-topo" onclick="window.location.href='gerenciargrade.jsp'">
                 <i class="fas fa-cog"></i> Gerenciar grade
             </button>
         </div>
