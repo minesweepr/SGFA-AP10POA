@@ -14,4 +14,8 @@
         <url-pattern>/RegistrarFaltaServlet</url-pattern>
     </servlet-mapping>
 
+    <!--Obrigando a primeira pagina ser o Login no lugar do index-->
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

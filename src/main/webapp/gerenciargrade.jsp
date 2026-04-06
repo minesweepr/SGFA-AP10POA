@@ -1,3 +1,14 @@
+
+<%
+    // Verifica se o usuário NÃO tem a sessão ativa
+    if (session.getAttribute("alunoAtivo") == null) {
+
+        response.sendRedirect("login.jsp");
+        return; // O return é vital para o servidor parar de carregar o resto da página!
+    }
+%>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -33,7 +44,7 @@
     </header>
 
     <main>
-        <a href="index.html" class="titulo-voltar">
+        <a href="index.jsp" class="titulo-voltar">
             <i class="fas fa-chevron-left"></i> Gerenciar minha grade
         </a>
 
