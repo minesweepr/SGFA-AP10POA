@@ -251,8 +251,8 @@
             <span id="texto-copyright">©2026 - SGFA</span>
         </div>
         <div class="footer-right">
-            <a href="#" id="link-suporte">Suporte</a>
-            <a href="#" id="link-site-institucional">Site institucional</a>
+            <a href="https://faeterj-rio.edu.br/central/index.php?a=add&category=2" id="link-suporte">Suporte</a>
+            <a href="https://www.faeterj-rio.edu.br/" id="link-site-institucional">Site institucional</a>
         </div>
     </footer>
 
