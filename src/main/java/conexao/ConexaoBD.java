@@ -6,11 +6,11 @@ import java.sql.SQLException;
 
 public class ConexaoBD {
     
-    private static final String URL = "jdbc:mysql://localhost:3306/SeLigaFalta";
+    private static final String URL = "jdbc:mysql://localhost:3307/SeLigaFalta";
     
     private static final String USER = "root";
     
-    private static final String PASS = "";
+    private static final String PASS = "senha_root";
 
     public static Connection conectar() {
         try {
