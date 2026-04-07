@@ -19,8 +19,8 @@
 .barra-busca-filtro {
     display: flex;
     gap: 15px;
-    margin-bottom: 20px;
     flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
 .input-busca-container {
@@ -126,9 +126,8 @@
 .barra-acoes-finais {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 30px;
-    padding-top: 20px;
+    align-items: flex-end;
+    margin-bottom: 20px;
     border-top: 2px solid rgba(173, 216, 230, 0.5); /* Usa a cor do grid como divisor */
     flex-wrap: wrap;
     gap: 15px;
@@ -176,4 +175,41 @@
     .botoes-finais button { width: 100%; }
     .linha-materia { flex-direction: column; align-items: flex-start; }
     .linha-materia .btn-selecionar { width: 100%; margin-top: 10px; }
+}
+
+/*dropdown dos filtros*/
+.dropdown-filtro {
+    position: absolute;
+    top: 266px;
+    right: 118px;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    width: 220px;
+    z-index: 999;
+}
+
+.dropdown-filtro.active {
+    display: flex;
+}
+
+.dropdown-filtro label {
+    user-select: none;
+    background: none;
+    border: none;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-filtro label:hover {
+    background-color: rgb(245, 245, 248);
 }

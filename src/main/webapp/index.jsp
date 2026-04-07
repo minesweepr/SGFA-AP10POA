@@ -81,7 +81,7 @@
             <button class="btn-dropdown-yellow" onclick="abrirModalFalta()">
                 <i class="fas fa-plus"></i> Registrar falta
             </button>
-            <button id="btn-configuracao"><i class="fas fa-cog"></i> Configuração</button>
+            <button id="btn-configuracao" onclick="window.location.href='gerenciargrade.jsp'"><i class="fas fa-cog"></i> Configuração</button>
             <button id="btn-sair"><i class="fas fa-sign-out-alt"></i> Sair</button>
         </div>
     </header>
@@ -232,18 +232,6 @@
                 </tbody>
             </table>
         </div>
-
-        <div class="color-dictionary">
-            <h3 class="dictionary-title">Dicionário de Cores</h3>
-            <ul class="dictionary-list">
-                <li><span class="color-box box-yellow"></span> <span>alerta que o usuário esqueceu de dizer se o dia foi faltoso, presente ou não aplicável</span></li>
-                <li><span class="color-box box-red"></span> <span>alerta que o usuário faltou nesse dia</span></li>
-                <li><span class="color-box box-green"></span> <span>alerta que o usuário estava presente nesse dia</span></li>
-                <li><span class="color-box box-gray"></span> <span>alerta que o dia é feriado ou não aplicavel</span></li>
-                <li><span class="color-box box-dark"></span> <span>caso base</span></li>
-            </ul>
-        </div>
-
     </main>
 
     <footer id="rodape-pagina">
