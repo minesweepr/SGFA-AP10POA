@@ -61,6 +61,9 @@
     flex-direction: column;
     gap: 10px;
     margin-bottom: 40px;
+    overflow: scroll;
+    height: 335px;
+    width: 100%;
 }
 
 .linha-materia {
@@ -81,7 +84,7 @@
 }
 
 .linha-materia .col-nome { flex: 2; font-weight: bold; min-width: 220px; }
-.linha-materia .col-horario { flex: 1; min-width: 150px; font-weight: 500; }
+.linha-materia .col-horario { flex: 1; text-align: center; min-width: 150px; font-weight: 500; }
 .linha-materia .col-codigo { flex: 1; text-align: center; font-weight: bold;}
 .linha-materia .col-carga { flex: 1; text-align: center; color: #666; }
 
@@ -94,6 +97,7 @@
     cursor: pointer;
     font-weight: bold;
     transition: 0.2s;
+    flex: 1;
 }
 
 .btn-selecionar:hover { opacity: 0.85; }
