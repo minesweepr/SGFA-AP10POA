@@ -5,7 +5,7 @@ import model.GradeSemanal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet; 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -29,12 +29,11 @@ public class GradeSemanalConector {
 
     public void preencherGrade(String matriculaAluno, String[][] matriz) {
 
-        String sql = "SELECT hd.dia_semana, ad.disciplina_codigo, ad.quantidade_tempos " +
+        String sql = "SELECT hd.dia_semana, ad.disciplina_codigo, ad.quantidade_tempos, ad.tempo_inicio " +
                 "FROM HorarioDia hd " +
                 "JOIN GradeSemanal gs ON hd.grade_id = gs.id " +
                 "JOIN AulaDisciplina ad ON ad.horario_dia_id = hd.id " +
-                "WHERE gs.aluno_matricula = ? " +
-                "ORDER BY hd.id, ad.id";
+                "WHERE gs.aluno_matricula = ?";
 
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -42,32 +41,51 @@ public class GradeSemanalConector {
             stmt.setString(1, matriculaAluno);
             ResultSet rs = stmt.executeQuery();
 
-            int[] proximaLinhaLivre = new int[5]; // 0=Segunda, 1=Terça, ..., 4=Sexta
-
             while (rs.next()) {
                 String dia = rs.getString("dia_semana");
                 String codigo = rs.getString("disciplina_codigo");
                 int qtdTempos = rs.getInt("quantidade_tempos");
+                int linhaInicio = rs.getInt("tempo_inicio") - 1;
 
-                int coluna = -1;
-                if (dia.equalsIgnoreCase("Segunda")) coluna = 0;
-                else if (dia.equalsIgnoreCase("Terça") || dia.equalsIgnoreCase("Terca")) coluna = 1;
-                else if (dia.equalsIgnoreCase("Quarta")) coluna = 2;
-                else if (dia.equalsIgnoreCase("Quinta")) coluna = 3;
-                else if (dia.equalsIgnoreCase("Sexta")) coluna = 4;
+                // tranformei função pra ficar mais organizado
+                int coluna = getColunaPorDia(dia);
 
-                if (coluna != -1) {
-                    for (int i = 0; i < qtdTempos; i++) {
-                        int linhaAtual = proximaLinhaLivre[coluna];
-                        if (linhaAtual < 6) {
-                            matriz[linhaAtual][coluna] = codigo;
-                            proximaLinhaLivre[coluna]++;
-                        }
+                if (coluna != -1 && linhaInicio >= 0) {
+                    // preenche a quantidade d tempos a partir da linha d inicio definida
+                    for (int i = 0; i < qtdTempos && (linhaInicio + i) < 6; i++) {
+                        matriz[linhaInicio + i][coluna] = codigo;
                     }
                 }
             }
         } catch (SQLException e) {
             System.err.println("Erro ao preencher grade de horários: " + e.getMessage());
         }
+    }
+
+    private int getColunaPorDia(String dia) {
+        if(dia==null) return -1;
+        String d=dia.toLowerCase();
+        if(d.contains("seg")) return 0;
+        if(d.contains("ter")) return 1;
+        if(d.contains("qua")) return 2;
+        if(d.contains("qui")) return 3;
+        if(d.contains("sex")) return 4;
+        return -1;
+    }
+
+    public int contarTemposDaDisciplina(String codigo, String matriculaAluno){
+        String sql="SELECT SUM(ad.quantidade_tempos) FROM AulaDisciplina ad " +
+                "JOIN HorarioDia hd ON ad.horario_dia_id = hd.id " +
+                "JOIN GradeSemanal gs ON hd.grade_id = gs.id " +
+                "WHERE ad.disciplina_codigo = ? AND gs.aluno_matricula = ?";
+
+        try (Connection conn = ConexaoBD.conectar();
+             PreparedStatement stmt=conn.prepareStatement(sql)){
+            stmt.setString(1, codigo);
+            stmt.setString(2, matriculaAluno);
+            ResultSet rs=stmt.executeQuery();
+            if(rs.next()) return rs.getInt(1);
+        }catch(SQLException e){ e.printStackTrace(); }
+        return 0;
     }
 }

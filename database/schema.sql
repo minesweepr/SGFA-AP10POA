@@ -57,7 +57,10 @@ INSERT INTO GradeSemanal (id, semestre, aluno_matricula) VALUES
 
 INSERT INTO HorarioDia (id, grade_id, dia_semana, faltou_dia_inteiro) VALUES
 (101, 100, 'Segunda', 0),
-(102, 100, 'Terça', 0);
+(102, 100, 'Terça', 0),
+(103, 100, 'Quarta', 0),
+(104, 100, 'Quinta', 0),
+(105, 100, 'Sexta', 0);
 
 INSERT INTO Disciplina (codigo, nome, carga_horaria_total) VALUES
 ('1FAC', 'Fundamentos de Algoritmos de Computação', 80),
