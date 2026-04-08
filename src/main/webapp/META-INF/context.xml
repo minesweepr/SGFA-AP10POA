@@ -1,0 +1,6 @@
+<Context>
+    <!-- Colar a chave dentro do value, entre "" (aspas)!!-->
+    <!--O "${API_KEY}" => Tem que virar "chavezinhaQualquerTaNoZap", sem $, sem {, sem }  -->
+
+    <Environment name="api.key" value="${API_KEY}" type="java.lang.String"/>
+</Context>
