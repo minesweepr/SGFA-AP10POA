@@ -66,7 +66,7 @@
             <button class="btn-dropdown-yellow" onclick="window.location.href='index.jsp'">
                 <i class="fas fa-home"></i> Tela Inicial
             </button>
-            <button id="btn-configuracao"><i class="fas fa-cog"></i> Configuração</button>
+            <button id="btn-configuracao" onclick="window.location.href='gerenciargrade.jsp'"><i class="fas fa-cog"></i> Configuração</button>
             <button id="btn-sair"><i class="fas fa-sign-out-alt"></i> Sair</button>
         </div>
     </header>
@@ -80,11 +80,19 @@
         <div class="barra-busca-filtro">
             <div class="input-busca-container">
                 <input type="text" id="input-busca-materia" placeholder="Pesquisar matéria...">
-                <i class="fas fa-search" style="color: #aaa;"></i>
+                <i class="fas fa-search" style="color: #aaa; cursor: pointer;"></i>
             </div>
-            <button class="btn-filtro">
+            <button class="btn-filtro" onclick="toggleMenuFiltro()">
                 Filtrar por ... <i class="fas fa-filter"></i>
             </button>
+
+            <div class="dropdown-filtro" id="menu-opcoes-filtro">
+                <label><input type="checkbox" class="check-periodo" value="1">1º Período</label>
+                <label><input type="checkbox" class="check-periodo" value="2">2º Período</label>
+                <label><input type="checkbox" class="check-periodo" value="3">3º Período</label>
+                <label><input type="checkbox" class="check-periodo" value="4">4º Período</label>
+                <label><input type="checkbox" class="check-periodo" value="5">5º Período</label>
+            </div>
         </div>
 
         <div class="lista-materias" id="container-materias-disponiveis">
@@ -111,9 +119,14 @@
                 <% } %>
         </div>
 
-        <div class="cabecalho-secao-inline">
-            <h2 class="section-title" style="margin-bottom: 0;">Minha grade</h2>
-            <button class="btn-editar-grade">editar grade</button>
+        <div class="barra-acoes-finais">
+            <div class="cabecalho-secao-inline" style="margin-bottom: 0;">
+                <h2 class="section-title" style="margin-bottom: 0;">Minha grade</h2>
+                <button class="btn-editar-grade">editar grade</button>                
+            </div>
+            <div class="total-disciplinas-box">
+                Total de disciplinas: <span id="contador-disciplinas-selecionadas"><%= disciplinasDoAluno.size() %></span>
+            </div>
         </div>
 
         <div class="table-responsive">
@@ -148,18 +161,6 @@
                 </tbody>
             </table>
         </div>
-
-        <div class="barra-acoes-finais">
-            <div class="total-disciplinas-box">
-                Total de disciplinas: <span id="contador-disciplinas-selecionadas"><%= disciplinasDoAluno.size() %></span>
-            </div>
-
-            <div class="botoes-finais">
-                <button class="btn-descartar" onclick="window.location.reload()">Descartar mudanças</button>
-                <button class="btn-salvar" onclick="salvarNovaGrade()">Salvar grade</button>
-            </div>
-        </div>
-
     </main>
 
     <footer id="rodape-pagina">
