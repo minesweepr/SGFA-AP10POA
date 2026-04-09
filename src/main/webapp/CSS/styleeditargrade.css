@@ -1,0 +1,106 @@
+/* ===== TÍTULO VOLTAR ===== */
+.titulo-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 26px;
+    color: var(--primary-dark);
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 45px;
+}
+
+.titulo-voltar:hover {
+    opacity: 0.8;
+}
+
+
+/* ===== GRID DE DISCIPLINAS ===== */
+/* sobrescreve o tamanho do index.css */
+.courses-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+
+/* ===== CARD (apenas comportamento extra) ===== */
+.course-card:hover {
+    transform: scale(1.02);
+}
+
+
+/* ===== CARD SELECIONADO ===== */
+.course-card.selecionado {
+    outline: 2px solid #2ecc71; /* NÃO quebra layout */
+    box-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
+}
+
+
+/* ===== BOTÃO REMOVER ===== */
+.btn-remover-disciplina {
+    margin-top: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.2s;
+}
+
+.btn-remover-disciplina:hover {
+    opacity: 0.85;
+}
+
+
+/* ===== BOTÕES DE AÇÃO ===== */
+.acoes-grade {
+    margin-top: 50px;
+    display: flex;
+    gap: 15px;
+}
+
+.acoes-grade button {
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+    color: white;
+}
+
+.acoes-grade button:first-child {
+    background-color: #1C335C;
+}
+
+.acoes-grade button:last-child {
+    background-color: #AD2B2E;
+    color: white;
+}
+
+.acoes-grade button:hover {
+    opacity: 0.9;
+}
+
+
+/* ===== LISTA DENTRO DO MODAL (customização específica) ===== */
+#modal-remover-lista {
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #fafafa;
+    margin-top: 10px;
+}
+
+#modal-remover-lista div {
+    padding: 5px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+#modal-remover-lista div:last-child {
+    border-bottom: none;
+}

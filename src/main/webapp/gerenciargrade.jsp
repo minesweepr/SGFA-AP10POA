@@ -122,7 +122,7 @@
         <div class="barra-acoes-finais">
             <div class="cabecalho-secao-inline" style="margin-bottom: 0;">
                 <h2 class="section-title" style="margin-bottom: 0;">Minha grade</h2>
-                <button class="btn-editar-grade">editar grade</button>                
+                <button class="btn-editar-grade" onclick="window.location.href='editargrade.jsp'">editar grade</button>
             </div>
             <div class="total-disciplinas-box">
                 Total de disciplinas: <span id="contador-disciplinas-selecionadas"><%= disciplinasDoAluno.size() %></span>
