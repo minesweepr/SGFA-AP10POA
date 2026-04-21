@@ -85,3 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
         card.addEventListener("click", () => toggleSelecao(codigo));
     });
 });
+
+// abrir menus hamburguer
+function toggleMenu() {
+    document.getElementById('menu-opcoes-usuario').classList.toggle('active');
+}

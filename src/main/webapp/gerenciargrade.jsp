@@ -67,7 +67,7 @@
                 <i class="fas fa-home"></i> Tela Inicial
             </button>
             <button id="btn-configuracao" onclick="window.location.href='gerenciargrade.jsp'"><i class="fas fa-cog"></i> Configuração</button>
-            <button id="btn-sair"><i class="fas fa-sign-out-alt"></i> Sair</button>
+            <button id="btn-sair" onclick="window.location.href='LogoutServlet'" ><i class="fas fa-sign-out-alt"></i> Sair</button>
         </div>
     </header>
 

@@ -185,9 +185,9 @@ header {
     color: var(--primary-dark);
 }
 
-.stat-card .value.success {
-    color: var(--success-green);
-}
+.stat-card .value.success {color: var(--success-green);}
+.stat-card .value.warning {color: var(--warning-orange);}
+.stat-card .value.danger {color: var(--danger-red);}
 
 /*  CARDS DE DISCIPLINA  */
 .section-title {

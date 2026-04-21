@@ -51,6 +51,19 @@
         GradeSemanalConector gradeDAO = new GradeSemanalConector();
         gradeDAO.preencherGrade(matriculaLogada, gradeMatriz);
 
+    // situação atual
+    // RN: 0=regular; 1=observação; 2=risco
+    int nivelSituacao=0;
+
+    for(Disciplina d:disciplinas){
+        int faltas=aulaDAO.contarFaltasDoAluno(matriculaLogada, d.getCodigo());
+        double percentual=(faltas*100.0)/d.getLimiteFaltas();
+
+        if(percentual>=85) nivelSituacao=2;
+        else if(percentual>=50 && nivelSituacao<1) nivelSituacao=1;
+    }
+    String[] textoSituacao={"Regular", "Observação", "Risco"};
+    String[] classeSituacao={"success", "warning", "danger"};
 %>
 
 <!DOCTYPE html>
@@ -119,7 +132,7 @@
             </div>
             <div class="stat-card">
                 <h3>Situação atual</h3>
-                <div class="value success" id="status-situacao-aluno">Regular</div>
+                <div class="value <%= classeSituacao[nivelSituacao] %>" id="status-situacao-aluno"><%= textoSituacao[nivelSituacao] %></div>
             </div>
         </div>
 
