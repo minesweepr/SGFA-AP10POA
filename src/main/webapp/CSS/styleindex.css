@@ -382,6 +382,7 @@ header {
     padding: 15px;
     font-weight: bold;
     font-size: 15px;
+    position: relative;
 }
 
 .tabela-horarios td {
@@ -416,6 +417,70 @@ header {
 .color-blue {
     color: #5bc0de;
     font-weight: 500;
+}
+
+/* NOTIFICAÇÃO DE FERIADO*/
+.holiday-notify {
+    width: 18px;
+    height: 18px;
+    background-color: #FFEFCA;
+    border: 2px solid #FFAE00;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 900;
+    color: #FF8D3B;
+    cursor: pointer;
+    margin-left: 4px;
+    z-index: 2;
+}
+
+span.holiday-notify .tooltip-text {
+    visibility: hidden;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    background-color: rgb(237 237 237 / 20%);
+    color: #1C335C;
+    text-align: center;
+    padding: 10px 15px;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+    font-weight: 400;
+    pointer-events: none;
+
+    position: absolute;
+    top: 93%;
+    right: 0;
+    min-width: 0;
+    max-width: 100%;
+    width: auto;
+    box-sizing: border-box;
+    border: 1px solid #dfdfdf;
+
+    z-index: 10;
+}
+
+.tooltip-text::after {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 50px;
+    transform: translateX(-4px);
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #dfdfdf transparent;
+}
+
+span.holiday-notify:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
 }
 
 /*  DICIONÁRIO DE CORES  */
